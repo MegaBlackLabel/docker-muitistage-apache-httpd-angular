@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  httpd:
+    image: frontend-angular
+    build:
+        context: ../
+        dockerfile: ./prod/Dockerfile
+    container_name: docker-muitistage-apache-httpd-angular-prod
+    environment:
+        NG_CLI_ANALYTICS: "ci"
+    ports:
+        - "80:80"
+    volumes:
+        - "/frontend:/frontend"
+        - nodemodules:/frontend/node_modules
+    tty: true
+
+volumes:
+    nodemodules:
+        driver: "local"
